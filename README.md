@@ -40,3 +40,17 @@ Command for docker-compose
 docker-compose looks for an image and if that image lready exists it doesnt build it again
 
 docker-compose up --build - forces to build a brand new image
+
+docker-compose -f docker-compose.yaml -f docker-compose.dev.yaml up -d
+
+To run two different compose file
+
+```
+ARG NODE_ENV
+RUN if [ "$NODE_ENV"== "development" ]; \
+    then npm install; \
+    else npm install --only==production; \
+    fi
+```
+
+This is needed for telling the Dockerfile which environment we are in, therefore in the docker-compose file we have to pass args in order to specify the respective enviroments (eg: production or development)
