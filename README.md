@@ -36,3 +36,7 @@ docker-compose file - to automate the process of spinning up the container
 
 docker-compose up -d
 Command for docker-compose
+
+docker-compose looks for an image and if that image lready exists it doesnt build it again
+
+docker-compose up --build - forces to build a brand new image
