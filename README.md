@@ -70,3 +70,5 @@ While connecting to the db container we have to pass the IP address of the conta
   .connect("mongodb://tanay:password@mongo:27017/?authSource=admin")
 
   docker log < container name> - to see the logs
+
+  We add depends_on: mongo in the node_app serive in docker-compose file so that mongo container spins up first because our node app depends on it.

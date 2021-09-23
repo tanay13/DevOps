@@ -1,16 +1,30 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const {
+  MONGO_USER,
+  MONGO_PASSWORD,
+  MONGO_IP,
+  MONGO_PORT,
+} = require("./config/config");
 
 const app = express();
 
-mongoose
-  .connect("mongodb://tanay:password@mongo:27017/?authSource=admin")
-  .then(() => {
-    console.log("DB connected");
-  })
-  .catch((e) => {
-    console.log(e);
-  });
+const mongoURL = `mongodb://${MONGO_USER}:${MONGO_PASSWORD}@${MONGO_IP}:${MONGO_PORT}/?authSource=admin`;
+
+// to retry connecting in case mongo has not initialized properly. // depends_on doesn't guarantee the order everytime
+const connectRetry = () => {
+  mongoose
+    .connect(mongoURL)
+    .then(() => {
+      console.log("DB connected");
+    })
+    .catch((e) => {
+      console.log(e);
+      setTimeout(connectRetry, 5000);
+    });
+};
+
+connectRetry();
 
 app.get("/", (req, res) => {
   res.send("hello there ");
