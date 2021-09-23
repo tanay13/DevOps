@@ -48,9 +48,18 @@ To run two different compose file
 ```
 ARG NODE_ENV
 RUN if [ "$NODE_ENV"== "development" ]; \
-    then npm install; \
-    else npm install --only==production; \
-    fi
+then npm install; \
+else npm install --only==production; \
+fi
 ```
 
 This is needed for telling the Dockerfile which environment we are in, therefore in the docker-compose file we have to pass args in order to specify the respective enviroments (eg: production or development)
+
+--build is important in docker-compose command if we have made changes in dockerfile
+
+docker exec -it < container name > mongo -u "username" -p "password" -> to get inside the db in container
+
+In database container when we give down command all the datas are lost, so to prevent this we use volumes to persist data.
+We have to declare the named volume we have used
+
+docker volume prune - deletes all unused volumes, it wont delete the running container volumes
