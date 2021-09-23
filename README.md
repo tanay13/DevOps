@@ -62,4 +62,11 @@ docker exec -it < container name > mongo -u "username" -p "password" -> to get i
 In database container when we give down command all the datas are lost, so to prevent this we use volumes to persist data.
 We have to declare the named volume we have used
 
-docker volume prune - deletes all unused volumes, it wont delete the running container volumes
+docker volume prune - deletes all unused volumes, it wont delete the running container volumes.
+
+While connecting to the db container we have to pass the IP address of the container but everytime we restart the container the IP changes so we use DNS and pass the service name instead of the IP address.
+
+- mongoose
+  .connect("mongodb://tanay:password@mongo:27017/?authSource=admin")
+
+  docker log < container name> - to see the logs
