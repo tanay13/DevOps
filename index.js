@@ -20,6 +20,7 @@ const connectRetry = () => {
     })
     .catch((e) => {
       console.log(e);
+      console.log("TRYING.....");
       setTimeout(connectRetry, 5000);
     });
 };
