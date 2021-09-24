@@ -5,13 +5,14 @@ exports.getAllPosts = async (req, res) => {
     const posts = await Post.find();
     res.status(200).json({
       status: "success",
-      results: posts.length(),
+      results: posts.length,
       data: {
         posts,
       },
     });
   } catch (e) {
     res.status(400).json({
+      message: e.message,
       staus: "failed to retreive",
     });
   }
@@ -20,7 +21,7 @@ exports.getAllPosts = async (req, res) => {
 exports.getPost = async (req, res) => {
   try {
     const id = req.params.id;
-    const post = await Post.findById({ id });
+    const post = await Post.findById(id);
     res.status(200).json({
       status: "success",
       data: {
@@ -29,6 +30,7 @@ exports.getPost = async (req, res) => {
     });
   } catch (e) {
     res.status(400).json({
+      message: e.message,
       staus: "failed to retreive",
     });
   }
