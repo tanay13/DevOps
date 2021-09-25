@@ -72,3 +72,9 @@ While connecting to the db container we have to pass the IP address of the conta
   docker log < container name> - to see the logs
 
   We add depends_on: mongo in the node_app serive in docker-compose file so that mongo container spins up first because our node app depends on it.
+
+  If we make changes to our docker-compose file while the containers are running then we dont need to give the down command and again the up command instead we can give the up command again and it will pull up the changes automatically.
+
+  docker-compose -f docker-compose.yaml -f docker-compose.dev.yaml up -d --build -V
+
+  For creating a new anonymous volume when we install a dependecy because otherwise docker will grab the old anony volume and the new dependencies will not be installed in our node_modules.
