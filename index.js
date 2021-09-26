@@ -54,7 +54,7 @@ app.use(
       resave: false,
       saveUninitialized: false,
       httpOnly: true,
-      maxAge: 3000000,
+      maxAge: 1000 * 30,
     },
   })
 );
@@ -70,5 +70,5 @@ app.use("/api/v1/users", userRouter);
 const port = process.env.PORT || 3000;
 
 app.listen(port, () => {
-  console.log("Server running");
+  console.log(`Server running on ${port}`);
 });

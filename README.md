@@ -78,3 +78,9 @@ While connecting to the db container we have to pass the IP address of the conta
   docker-compose -f docker-compose.yaml -f docker-compose.dev.yaml up -d --build -V
 
   For creating a new anonymous volume when we install a dependecy because otherwise docker will grab the old anony volume and the new dependencies will not be installed in our node_modules.
+
+![image](assets/arch.png)
+
+Load-Balancing
+
+![image](assets/loadbalancer.png)
