@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const session = require("express-session");
 const redis = require("redis");
+const cors = require("cors");
 let RedisStore = require("connect-redis")(session);
 
 const {
@@ -22,6 +23,7 @@ let redisClient = redis.createClient({
 const postRouter = require("./routes/postRoute");
 
 const userRouter = require("./routes/userRoute");
+const { populate } = require("./models/postModel");
 
 const app = express();
 
@@ -45,6 +47,11 @@ const connectRetry = () => {
 
 connectRetry();
 
+// To allow some of the nginx headers
+app.enable("trust proxy");
+
+app.use(cors({}));
+
 app.use(
   session({
     store: new RedisStore({ client: redisClient }),
@@ -61,6 +68,7 @@ app.use(
 
 app.get("/api/v1", (req, res) => {
   res.send("hello there ");
+  console.log("Node-app");
 });
 
 app.use("/api/v1/posts", postRouter);

@@ -84,3 +84,7 @@ While connecting to the db container we have to pass the IP address of the conta
 Load-Balancing
 
 ![image](assets/loadbalancer.png)
+
+docker-compose -f docker-compose.yaml -f docker-compose.dev.yaml up -d --scale node-app=2
+
+To run 2 instance of node-app
